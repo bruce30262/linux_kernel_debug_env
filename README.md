@@ -65,4 +65,11 @@ qemu-system-x86_64 -initrd initrd.cpio.gz -kernel bzImage -append 'console=ttyS0
 
 This doesn't has a lot to explain, you can also add your own argument in it, or do this manually.
 
+## debug
+add `-s` option in `run` script, then launch gdb:  
+```
+set arch i386:x86-64
+target remote localhost:1234
+```
+
 Enjoy.
