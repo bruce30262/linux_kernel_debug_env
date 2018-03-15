@@ -1,4 +1,4 @@
-NULL pointer dereference practice
+NULL pointer dereference practice  
 ref: [link](http://tacxingxing.com/2018/02/22/linuxkernelexploit-null-dereference/) 
 
 init in rootfs:
