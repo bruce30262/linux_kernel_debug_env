@@ -1,3 +1,4 @@
+# gdb script for remote kernel debugging ( for my pwndbg ) 
 add-auto-load-safe-path ./vmlinux
 set arch i386:x86-64
 trl 1234
