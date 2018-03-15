@@ -1,10 +1,12 @@
+#include <linux/uaccess.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/proc_fs.h>
-#include <asm-generic/uaccess.h>
+//#include <asm-generic/uaccess.h>
 
 static char msg[128];
-static int len = 0;
+//static int len = 0;
+static int len_check = 1;
 int simple_proc_open(struct inode * sp_inode, struct file *sp_file)
 {
     printk(KERN_INFO "proc called open\n");
@@ -16,18 +18,25 @@ int simple_proc_release(struct inode *sp_indoe, struct file *sp_file)
     return 0;
 }
 
-int simple_proc_read(struct file *sp_file,char __user *buf, size_t size, loff_t *offset)
+ssize_t simple_proc_read(struct file *sp_file,char __user *buf, size_t size, loff_t *offset)
 {
+    if (len_check)
+        len_check = 0;
+    else {
+        len_check = 1;
+        return 0;
+    }
+    //len = size;
     printk(KERN_INFO "proc called read %d\n",size);
-    copy_to_user(buf,msg,len);
-    return len;
+    copy_to_user(buf,msg,size);
+    return size;
 }
-int simple_proc_write(struct file *sp_file,const char __user *buf, size_t size, loff_t *offset)
+ssize_t simple_proc_write(struct file *sp_file,const char __user *buf, size_t size, loff_t *offset)
 {
     printk(KERN_INFO "proc called write %d\n",size);
-    len = size;
-    copy_from_user(msg,buf,len);
-    return len;
+    //len = size;
+    copy_from_user(msg,buf,size);
+    return size;
 }
 
 struct file_operations fops = {
