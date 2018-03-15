@@ -1,7 +1,0 @@
-# ignore these
-*
-
-# except these file
-!.gitignore
-!make_work_env.sh
-!readme.txt

@@ -72,4 +72,8 @@ set arch i386:x86-64
 target remote localhost:1234
 ```
 
+## work
+Choose a directory ( for working linux kernel exploitation ), copy `make_work_env.sh` into that directory and run it.
+This will copy necessary files into your working directory. And now you can start working.
+
 Enjoy.
