@@ -1,5 +1,6 @@
 NULL pointer dereference practice  
-ref: [link](http://tacxingxing.com/2018/02/22/linuxkernelexploit-null-dereference/) 
+ref: [link](http://tacxingxing.com/2018/02/22/linuxkernelexploit-null-dereference/)  
+linux kernel version: 4.4.72
 
 init in rootfs:
 ```
